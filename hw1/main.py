@@ -1,5 +1,4 @@
 import ast
-import inspect
 import networkx as nx
 
 
@@ -30,11 +29,15 @@ class Walker(ast.NodeVisitor):
 
         super(self.__class__, self).generic_visit(stmt)
         self.stack.pop()
-        
 
-if __name__ == '__main__':
-    ast_object = ast.parse(open('fib.py', 'r').read())
+
+def generate_graph(input_file='fib.py', output_file='artifacts/graph.png'):
+    ast_object = ast.parse(open(input_file, 'r').read())
     walker = Walker()
     walker.visit(ast_object)
     img = nx.drawing.nx_pydot.to_pydot(walker.graph)
-    img.write_png('artifacts/graph.png')
+    img.write_png(output_file)
+        
+
+if __name__ == '__main__':
+    generate_graph()
