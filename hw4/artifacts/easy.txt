@@ -1,0 +1,2 @@
+threading: 0.468593800032977 s.
+multiprocessing: 0.3510295000160113 s.
